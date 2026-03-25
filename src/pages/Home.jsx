@@ -110,35 +110,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── ABOUT US SECTION (Logo Made Bigger) ── */}
-      <section style={{ backgroundColor: 'white', padding: '100px 32px' }}>
-        <div style={{ 
-          ...styles.sectionMax, 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: '200px', // More space between logo and text
-          flexWrap: 'wrap' 
-        }}>
+      {/* ── ABOUT US SECTION ── */}
+      <section style={{ backgroundColor: 'white', padding: '10px 35px 100px', marginLeft: '100px' }}>
+        <div style={{ ...styles.sectionMax, display: 'flex', alignItems: 'center', gap: '200px', flexWrap: 'wrap' }}>
           
           {/* GRC Icon Image - ENLARGED */}
           <div style={{ flexShrink: 0, flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '400px' }}>
             <img 
-              src="path-to-your-grc-icon.png" 
+              src={"grcIcon"} // Replace with {grcIcon}
               alt="GRC Icon"
               style={{ 
-                width: '100%', 
-                maxWidth: '999px', // Increased size from 200px to 450px
-                height: 'auto', 
-                objectFit: 'contain',
-                filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.1))' // Soft shadow for visibility
+                width: '450px', // Increased size
+                maxWidth: '450%', // Ensure it doesn't overflow on smaller screens
+                height: '450px', // Increased size
+                objectFit: 'contain' 
               }}
-              onError={(e) => { e.target.src="src/img/grc logo.png" }}
+              onError={(e) => { e.target.style.opacity = "0.2"; e.target.src="src/img/grc logo.png" }}
             />
           </div>
 
-          <div style={{ flex: 1.2, minWidth: '300px' }}>
-            <p style={{ color: GRC_RED, fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '12px' }}>About Us</p>
-            <h2 style={{ fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 900, color: '#111', lineHeight: 1.15, marginBottom: '20px' }}>
+          <div style={{ flex: 1, minWidth: '20px' }}>
+            <p style={{ color: GRC_RED, fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '16px' }}>About Us</p>
+            <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 900, color: '#111', lineHeight: 1.15, marginBottom: '25px' }}>
               Driving <span style={{ color: GRC_RED }}>Knowledge,</span><br />
               Serving <span style={{ color: GRC_RED }}>Communities.</span>
             </h2>
