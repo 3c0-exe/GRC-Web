@@ -119,24 +119,25 @@ export default function Home() {
       </section>
 
       {/* ── ABOUT US SECTION ── */}
-      <section style={{ backgroundColor: 'white', padding: '80px 32px 100px' }}>
-        <div style={{ ...styles.sectionMax, display: 'flex', alignItems: 'center', gap: '100px', flexWrap: 'wrap' }}>
+      <section style={{ backgroundColor: 'white', padding: '10px 35px 100px', marginLeft: '100px' }}>
+        <div style={{ ...styles.sectionMax, display: 'flex', alignItems: 'center', gap: '200px', flexWrap: 'wrap' }}>
           
           {/* LARGE GRC Icon Image */}
           <div style={{ flexShrink: 0, width: '320px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <img 
-              src="path-to-your-grc-icon.png" // Replace with {grcIcon}
+              src={"grcIcon"} // Replace with {grcIcon}
               alt="GRC Icon"
               style={{ 
-                width: '320px', // Increased size
-                height: '320px', // Increased size
+                width: '450px', // Increased size
+                maxWidth: '450%', // Ensure it doesn't overflow on smaller screens
+                height: '450px', // Increased size
                 objectFit: 'contain' 
               }}
-              onError={(e) => { e.target.style.opacity = "0.2"; e.target.src="https://via.placeholder.com/320?text=GRC+Icon" }}
+              onError={(e) => { e.target.style.opacity = "0.2"; e.target.src="src/img/grc logo.png" }}
             />
           </div>
 
-          <div style={{ flex: 1, minWidth: '300px' }}>
+          <div style={{ flex: 1, minWidth: '20px' }}>
             <p style={{ color: GRC_RED, fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '16px' }}>About Us</p>
             <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 900, color: '#111', lineHeight: 1.15, marginBottom: '25px' }}>
               Driving <span style={{ color: GRC_RED }}>Knowledge,</span><br />
