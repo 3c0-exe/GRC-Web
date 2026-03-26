@@ -4,13 +4,12 @@ import { useState } from 'react';
 const GRC_RED = '#C8102E';
 const NOISE_SVG = "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")";
 
-// INSERT YOUR PHOTO PATH HERE
 const HERO_BG_PHOTO = "src/img/schoool_Image_aeq4ijaeq4ijaeq4.png"; 
 
 // ── 2. MODULAR STYLES ──
 const styles = {
   input: {
-    width: '200%',
+    width: '100%',
     padding: '14px 18px',
     border: '1px solid rgba(255,255,255,0.25)',
     borderRadius: '6px',
@@ -43,8 +42,6 @@ const styles = {
   },
   gridTwo: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' },
   gridThree: { display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' },
-  
-  // New Background Photo Styles
   heroBg: {
     position: 'absolute', 
     inset: 0,
@@ -54,7 +51,6 @@ const styles = {
     backgroundRepeat: 'no-repeat',
     zIndex: 0
   },
-  // The dark/red tint overlay to make text pop
   heroOverlay: {
     position: 'absolute', 
     inset: 0, 
@@ -106,35 +102,145 @@ export default function Alumni() {
   return (
     <div style={{ fontFamily: "'Poppins', sans-serif" }}>
       <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Poppins:wght@400;500;600;700&display=swap');
+
         input::placeholder { color: rgba(255,255,255,0.55); }
         input:focus { border-color: rgba(255,255,255,0.6); background-color: rgba(255,255,255,0.18); }
         button:hover { opacity: 0.9; }
+
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(28px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .hero-eyebrow  { animation: fadeUp 0.6s ease both; animation-delay: 0.1s; }
+        .hero-heading  { animation: fadeUp 0.7s ease both; animation-delay: 0.25s; }
+        .hero-divider  { animation: fadeUp 0.6s ease both; animation-delay: 0.42s; }
+        .hero-body     { animation: fadeUp 0.6s ease both; animation-delay: 0.55s; }
+        .hero-cta      { animation: fadeUp 0.6s ease both; animation-delay: 0.68s; }
       `}</style>
 
       {/* ── HERO SECTION ── */}
-      <section style={{ position: 'relative', minHeight: '550px', display: 'flex', alignItems: 'flex-end', overflow: 'hidden' }}>
-        
-        {/* The Photo Background */}
+      <section style={{
+        position: 'relative',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        overflow: 'hidden',
+      }}>
         <div style={styles.heroBg} />
-        
-        {/* The Color Overlay */}
         <div style={styles.heroOverlay} />
 
         {/* Red bottom accent line */}
         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '6px', backgroundColor: GRC_RED, zIndex: 2 }} />
 
-        <div style={{ position: 'relative', zIndex: 3, maxWidth: '1100px', margin: '0 auto', padding: '100px 32px 80px', width: '100%' }}>
-          <h1 style={{ color: 'white', fontSize: 'clamp(32px, 5.5vw, 60px)', fontWeight: 900, lineHeight: 1.1, marginBottom: '24px' }}>
-            Securing Our Legacy,<br />Reciprocating Your Success.
+        {/* Hero content */}
+        <div style={{
+          position: 'relative',
+          zIndex: 3,
+          maxWidth: '1100px',
+          margin: '0 auto',
+          padding: '0 48px',
+          width: '100%',
+        }}>
+
+          {/* Eyebrow */}
+          <div className="hero-eyebrow" style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '12px',
+            marginBottom: '32px',
+          }}>
+            <span style={{ display: 'block', width: '40px', height: '2px', backgroundColor: GRC_RED }} />
+            <span style={{
+              color: 'rgba(255,255,255,0.65)',
+              fontSize: '11px',
+              fontWeight: 600,
+              letterSpacing: '0.22em',
+              textTransform: 'uppercase',
+              fontFamily: "'Poppins', sans-serif",
+            }}>
+              Alumni Network
+            </span>
+          </div>
+
+          {/* Heading */}
+          <h1 className="hero-heading" style={{
+            fontFamily: "'Playfair Display', Georgia, serif",
+            color: 'white',
+            fontSize: 'clamp(38px, 5.5vw, 70px)',
+            fontWeight: 900,
+            lineHeight: 1.08,
+            letterSpacing: '-0.01em',
+            maxWidth: '740px',
+            margin: '0 0 0 0',
+          }}>
+            Securing Our Legacy,{' '}
+            <br />
+            <span style={{ color: GRC_RED, fontStyle: 'italic' }}>Reciprocating</span>{' '}
+            Your Success.
           </h1>
-          <p style={{ color: 'rgba(255,255,255,0.95)', fontSize: '16px', fontWeight: 500, lineHeight: 1.8, maxWidth: '550px', textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>
-            From your first steps as a student to your journey as a leader, we provide professional connections tailored to your growth.
+
+          {/* Divider */}
+          <div className="hero-divider" style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            margin: '36px 0',
+            maxWidth: '340px',
+          }}>
+            <span style={{ flex: 1, height: '1px', backgroundColor: 'rgba(255,255,255,0.18)' }} />
+            <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: GRC_RED, flexShrink: 0 }} />
+            <span style={{ flex: 1, height: '1px', backgroundColor: 'rgba(255,255,255,0.18)' }} />
+          </div>
+
+          {/* Body */}
+          <p className="hero-body" style={{
+            fontFamily: "'Poppins', sans-serif",
+            color: 'rgba(255,255,255,0.78)',
+            fontSize: '16px',
+            fontWeight: 400,
+            lineHeight: 1.9,
+            maxWidth: '460px',
+            margin: '0 0 44px 0',
+          }}>
+            From your first steps as a student to your journey as a leader,
+            we provide professional connections tailored to your growth.
           </p>
+
+          {/* CTA */}
+          <div className="hero-cta">
+            <a
+              href="#alumni-form"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '10px',
+                backgroundColor: GRC_RED,
+                color: 'white',
+                padding: '15px 34px',
+                borderRadius: '6px',
+                fontFamily: "'Poppins', sans-serif",
+                fontWeight: 700,
+                fontSize: '13px',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+                transition: 'opacity 0.2s ease',
+              }}
+              onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
+              onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+            >
+              Register Now
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+          </div>
         </div>
       </section>
 
       {/* ── ALUMNI FORM SECTION ── */}
-      <section style={{ background: `linear-gradient(170deg, #9b0020 0%, #6b0010 100%)`, padding: '80px 32px', position: 'relative' }}>
+      <section id="alumni-form" style={{ background: `linear-gradient(170deg, #9b0020 0%, #6b0010 100%)`, padding: '80px 32px', position: 'relative' }}>
         <div style={{ position: 'absolute', inset: 0, opacity: 0.04, pointerEvents: 'none', backgroundImage: NOISE_SVG }} />
 
         <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative', zIndex: 1 }}>

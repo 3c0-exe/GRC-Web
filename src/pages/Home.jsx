@@ -1,9 +1,5 @@
 import { Link } from 'react-router-dom';
 
-// ── 1. ASSET IMPORTS ──
-// import rceMedallion from '../assets/rce-medallion.png';
-// import grcIcon from '../assets/grc-logo.png';
-
 const GRC_RED = '#C8102E';
 
 const styles = {
@@ -11,27 +7,21 @@ const styles = {
   sectionMax: { maxWidth: '1200px', margin: '0 auto' },
   heroSection: { 
     backgroundColor: GRC_RED, 
-    minHeight: '420px', 
+    minHeight: '100vh', 
     position: 'relative', 
-    overflow: 'hidden' 
+    overflow: 'hidden',
+    display: 'flex',
+    alignItems: 'center',
   },
-  heroText: { 
-    color: 'white', 
-    fontSize: 'clamp(32px, 5vw, 54px)', 
-    fontWeight: 900, 
-    textTransform: 'uppercase', 
-    lineHeight: 1.08, 
-    marginBottom: '20px', 
-    letterSpacing: '-0.01em',
-    textAlign: 'left'
-  },
-  btnRed: { 
-    display: 'inline-block', 
+  btnDark: { 
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '10px',
     backgroundColor: '#8B0000', 
     color: 'white', 
     fontSize: '13px', 
     fontWeight: 700, 
-    padding: '14px 32px', 
+    padding: '15px 34px', 
     textDecoration: 'none', 
     textTransform: 'uppercase', 
     letterSpacing: '0.08em', 
@@ -64,39 +54,137 @@ const styles = {
 export default function Home() {
   return (
     <div style={styles.container}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Poppins:wght@400;500;600;700;900&display=swap');
+
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(28px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .hero-eyebrow { animation: fadeUp 0.6s ease both; animation-delay: 0.1s; }
+        .hero-heading { animation: fadeUp 0.7s ease both; animation-delay: 0.25s; }
+        .hero-divider { animation: fadeUp 0.6s ease both; animation-delay: 0.42s; }
+        .hero-body    { animation: fadeUp 0.6s ease both; animation-delay: 0.55s; }
+        .hero-cta     { animation: fadeUp 0.6s ease both; animation-delay: 0.68s; }
+        .hero-image   { animation: fadeUp 0.8s ease both; animation-delay: 0.3s; }
+        .social-icon:hover { transform: scale(1.15); }
+      `}</style>
 
       {/* ── HERO SECTION ── */}
       <section style={styles.heroSection}>
         <div style={styles.noiseOverlay} />
-        <div style={{ 
-          ...styles.sectionMax, 
-          padding: '120px 20px 72px 10px', 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'flex-start', 
-          gap: '60px', 
-          flexWrap: 'wrap' 
+
+        {/* Bottom accent line */}
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '6px', backgroundColor: '#8B0000', zIndex: 2 }} />
+
+        <div style={{
+          ...styles.sectionMax,
+          padding: '0 48px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '60px',
+          flexWrap: 'wrap',
+          width: '100%',
+          position: 'relative',
+          zIndex: 1,
         }}>
-          <div style={{ flex: 1, minWidth: '280px' }}>
-            <h1 style={styles.heroText}>Research and<br />Community<br />Extension</h1>
-            <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '14px', lineHeight: 1.75, maxWidth: '360px', marginBottom: '36px' }}>
-              Leaders in transformative research and grassroots extension. Building knowledge. Empowering communities. Changing lives.
+
+          {/* ── LEFT: Text content ── */}
+          <div style={{ flex: 1, minWidth: '300px', maxWidth: '580px' }}>
+
+            {/* Eyebrow */}
+            <div className="hero-eyebrow" style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '12px',
+              marginBottom: '32px',
+            }}>
+              <span style={{ display: 'block', width: '40px', height: '2px', backgroundColor: 'rgba(255,255,255,0.5)' }} />
+              <span style={{
+                color: 'rgba(255,255,255,0.65)',
+                fontSize: '11px',
+                fontWeight: 600,
+                letterSpacing: '0.22em',
+                textTransform: 'uppercase',
+                fontFamily: "'Poppins', sans-serif",
+              }}>
+                GRC Office
+              </span>
+            </div>
+
+            {/* Heading */}
+            <h1 className="hero-heading" style={{
+              fontFamily: "'Playfair Display', Georgia, serif",
+              color: 'white',
+              fontSize: 'clamp(38px, 5vw, 66px)',
+              fontWeight: 900,
+              lineHeight: 1.08,
+              letterSpacing: '-0.01em',
+              margin: '0',
+            }}>
+              Research &amp;{' '}
+              <span style={{ fontStyle: 'italic' }}>Community</span>
+              <br />Extension
+            </h1>
+
+            {/* Divider */}
+            <div className="hero-divider" style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              margin: '32px 0',
+              maxWidth: '340px',
+            }}>
+              <span style={{ flex: 1, height: '1px', backgroundColor: 'rgba(255,255,255,0.25)' }} />
+              <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'white', flexShrink: 0 }} />
+              <span style={{ flex: 1, height: '1px', backgroundColor: 'rgba(255,255,255,0.25)' }} />
+            </div>
+
+            {/* Body */}
+            <p className="hero-body" style={{
+              fontFamily: "'Poppins', sans-serif",
+              color: 'rgba(255,255,255,0.82)',
+              fontSize: '15px',
+              fontWeight: 400,
+              lineHeight: 1.9,
+              maxWidth: '440px',
+              margin: '0 0 44px 0',
+            }}>
+              Leaders in transformative research and grassroots extension.
+              Building knowledge. Empowering communities. Changing lives.
             </p>
-            <Link to="/contact" style={styles.btnRed}>Enroll Now!</Link>
+
+            {/* CTA */}
+            <div className="hero-cta">
+              <Link
+                to="/contact"
+                style={styles.btnDark}
+                onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
+                onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+              >
+                Enroll Now!
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </Link>
+            </div>
           </div>
 
-          <div style={{ flexShrink: 0 }}>
+          {/* ── RIGHT: Logo image ── */}
+          <div className="hero-image" style={{ flexShrink: 0 }}>
             <img 
               src="src/img/RCE logo.png" 
               alt="RCE Medallion" 
               style={{ 
-                width: '500px', 
-                height: '500px', 
+                width: 'clamp(280px, 35vw, 460px)',
+                height: 'clamp(280px, 35vw, 460px)',
                 objectFit: 'contain',
-                filter: 'drop-shadow(0 10px 25px rgba(0,0,0,0.25))' 
+                filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.3))' 
               }} 
             />
           </div>
+
         </div>
       </section>
 
@@ -122,11 +210,7 @@ export default function Home() {
             <img 
               src="src/img/grc logo.png" 
               alt="GRC Icon"
-              style={{ 
-                width: '450px', 
-                height: '450px', 
-                objectFit: 'contain' 
-              }}
+              style={{ width: '450px', height: '450px', objectFit: 'contain' }}
             />
           </div>
 
@@ -155,7 +239,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <Link to="/about" style={{ ...styles.btnRed, backgroundColor: GRC_RED, boxShadow: 'none' }}>Learn More</Link>
+            <Link to="/about" style={{ ...styles.btnDark, backgroundColor: GRC_RED, boxShadow: 'none' }}>Learn More</Link>
           </div>
         </div>
       </section>
@@ -171,7 +255,6 @@ export default function Home() {
           </div>
 
           <div style={{ display: 'flex', gap: '56px', flexWrap: 'wrap' }}>
-            {/* Contact Details & Follow Us */}
             <div style={{ flex: 1, minWidth: '240px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
                <div>
                   <ContactInfo icon="📍" text="GRC Building, Caloocan, Philippines" />
@@ -179,15 +262,13 @@ export default function Home() {
                   <ContactInfo icon="✉️" text="rceassistextension0104@gmail.com" />
                </div>
 
-               {/* FOLLOW US NAVIGATION */}
                <div style={{ borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '24px' }}>
                   <p style={{ color: 'white', fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '0.1em' }}>Follow Us</p>
                   <div style={{ display: 'flex', gap: '20px' }}>
-                    {/* Replace '#' with your actual social media links */}
-                    <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="FB" style={styles.socialIcon} /></a>
-                    <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="IG" style={styles.socialIcon} /></a>
-                    <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" style={styles.socialIcon} /></a>
-                    <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="IN" style={styles.socialIcon} /></a>
+                    <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="FB" style={styles.socialIcon} className="social-icon" /></a>
+                    <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="IG" style={styles.socialIcon} className="social-icon" /></a>
+                    <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" style={styles.socialIcon} className="social-icon" /></a>
+                    <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="IN" style={styles.socialIcon} className="social-icon" /></a>
                   </div>
                </div>
             </div>
@@ -198,7 +279,7 @@ export default function Home() {
                 <input style={styles.inputField} placeholder="Year & Sec" />
                 <input style={styles.inputField} placeholder="Student No" />
                 <textarea style={{ ...styles.inputField, resize: 'none' }} placeholder="Message" rows={4} />
-                <button style={{ ...styles.btnRed, border: 'none', cursor: 'pointer', backgroundColor: '#6B0000', width: '100%' }}>Send Message</button>
+                <button style={{ ...styles.btnDark, border: 'none', cursor: 'pointer', backgroundColor: '#6B0000', width: '100%', justifyContent: 'center' }}>Send Message</button>
               </div>
             </div>
           </div>

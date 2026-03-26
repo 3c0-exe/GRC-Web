@@ -4,67 +4,20 @@ import React from 'react';
 const GRC_RED = '#C8102E';
 const NOISE = "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")";
 
-// Your local image path
 const GRC_ICON_PHOTO = "src/img/grc logo.png"; 
 
 // ── 2. STYLES ARCHIVE ──
 const styles = {
   container: { fontFamily: "'Poppins', sans-serif", color: '#333' },
-  sectionMax: { maxWidth: '1200px', margin: '0 auto', padding: '0 32px' }, // Slightly wider for better spacing
-  
+  sectionMax: { maxWidth: '1200px', margin: '0 auto', padding: '0 48px' },
+
   hero: { 
     backgroundColor: GRC_RED, 
-    minHeight: '500px', 
+    minHeight: '100vh', 
     position: 'relative', 
     overflow: 'hidden',
     display: 'flex',
-    alignItems: 'center'
-  },
-  heroContent: {
-    display: 'flex', 
-    alignItems: 'center', 
-    justifyContent: 'space-between', 
-    gap: '80px', // INCREASED GAP: Adds significant space between text and photo
-    flexWrap: 'wrap', 
-    position: 'relative', 
-    zIndex: 1,
-    padding: '100px 0'
-  },
-  textSide: {
-    flex: 1, 
-    minWidth: '300px',
-    paddingRight: '40px' // ASIDE: Pushes the text specifically further to the left
-  },
-  heroTitle: { 
-    color: 'white', 
-    fontSize: 'clamp(32px, 5vw, 52px)', 
-    fontWeight: 900, 
-    lineHeight: 1.1 
-  },
-  heroSub: { 
-    color: 'rgba(255,255,255,0.9)', 
-    fontSize: '15px', 
-    lineHeight: 1.8, 
-    maxWidth: '450px', 
-    marginTop: '24px' 
-  },
-
-  // ── LOGO STYLES ──
-  photoContainer: {
-    flexShrink: 0,
-    width: '450px', 
-    height: '450px', 
-    display: 'flex', 
-    alignItems: 'center', 
-    justifyContent: 'center', 
-    opacity: 1.0, 
-    zIndex: 2,
-  },
-  photoImg: {
-    width: '100%',
-    height: '100%',
-    objectFit: 'contain',
-    filter: 'drop-shadow(0px 15px 30px rgba(0,0,0,0.25))' 
+    alignItems: 'center',
   },
 
   projectGrid: { 
@@ -96,39 +49,129 @@ const styles = {
     position: 'absolute', inset: 0, opacity: 0.06, 
     backgroundImage: NOISE, backgroundSize: '200px 200px', pointerEvents: 'none' 
   },
-  gradient: { 
-    position: 'absolute', inset: 0, 
-    background: 'linear-gradient(105deg, rgba(0,0,0,0.3) 0%, transparent 70%)', pointerEvents: 'none' 
-  }
 };
 
 export default function Achievements() {
   return (
     <div style={styles.container}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Poppins:wght@400;500;600;700;900&display=swap');
+
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(28px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .hero-eyebrow { animation: fadeUp 0.6s ease both; animation-delay: 0.1s; }
+        .hero-heading { animation: fadeUp 0.7s ease both; animation-delay: 0.25s; }
+        .hero-divider { animation: fadeUp 0.6s ease both; animation-delay: 0.42s; }
+        .hero-body    { animation: fadeUp 0.6s ease both; animation-delay: 0.55s; }
+        .hero-image   { animation: fadeUp 0.8s ease both; animation-delay: 0.3s; }
+      `}</style>
 
       {/* ── HERO SECTION ── */}
       <section style={styles.hero}>
         <div style={styles.noise} />
-        <div style={styles.gradient} />
 
-        <div style={{ ...styles.sectionMax, width: '100%' }}>
-          <div style={styles.heroContent}>
-            
-            {/* ── TEXT SIDE (Adjusted spacing) ── */}
-            <div style={styles.textSide}>
-              <h1 style={styles.heroTitle}>Integrity in Learning,<br />Trust in Leadership.</h1>
-              <p style={styles.heroSub}>
-                Four decades of academic milestones and career breakthroughs. From top-tier board passers 
-                to industry innovators, we shape the future of global industries.
+        {/* Dark gradient for depth */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(105deg, rgba(0,0,0,0.3) 0%, transparent 70%)',
+          pointerEvents: 'none'
+        }} />
+
+        {/* Bottom accent line */}
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '6px', backgroundColor: '#8B0000', zIndex: 2 }} />
+
+        <div style={{ ...styles.sectionMax, width: '100%', position: 'relative', zIndex: 1 }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '60px',
+            flexWrap: 'wrap',
+            padding: '100px 0',
+          }}>
+
+            {/* ── LEFT: Text ── */}
+            <div style={{ flex: 1, minWidth: '300px', maxWidth: '580px' }}>
+
+              {/* Eyebrow */}
+              <div className="hero-eyebrow" style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '12px',
+                marginBottom: '32px',
+              }}>
+                <span style={{ display: 'block', width: '40px', height: '2px', backgroundColor: 'rgba(255,255,255,0.5)' }} />
+                <span style={{
+                  color: 'rgba(255,255,255,0.65)',
+                  fontSize: '11px',
+                  fontWeight: 600,
+                  letterSpacing: '0.22em',
+                  textTransform: 'uppercase',
+                  fontFamily: "'Poppins', sans-serif",
+                }}>
+                  Our Achievements
+                </span>
+              </div>
+
+              {/* Heading */}
+              <h1 className="hero-heading" style={{
+                fontFamily: "'Playfair Display', Georgia, serif",
+                color: 'white',
+                fontSize: 'clamp(38px, 5vw, 66px)',
+                fontWeight: 900,
+                lineHeight: 1.08,
+                letterSpacing: '-0.01em',
+                margin: 0,
+              }}>
+                Integrity in Learning,{' '}
+                <br />
+                <span style={{ fontStyle: 'italic' }}>Trust</span>{' '}
+                in Leadership.
+              </h1>
+
+              {/* Divider */}
+              <div className="hero-divider" style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                margin: '32px 0',
+                maxWidth: '340px',
+              }}>
+                <span style={{ flex: 1, height: '1px', backgroundColor: 'rgba(255,255,255,0.25)' }} />
+                <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'white', flexShrink: 0 }} />
+                <span style={{ flex: 1, height: '1px', backgroundColor: 'rgba(255,255,255,0.25)' }} />
+              </div>
+
+              {/* Body */}
+              <p className="hero-body" style={{
+                fontFamily: "'Poppins', sans-serif",
+                color: 'rgba(255,255,255,0.82)',
+                fontSize: '15px',
+                fontWeight: 400,
+                lineHeight: 1.9,
+                maxWidth: '450px',
+                margin: '0 0 44px 0',
+              }}>
+                Four decades of academic milestones and career breakthroughs. 
+                From top-tier board passers to industry innovators, we shape 
+                the future of global industries.
               </p>
+
             </div>
 
-            {/* ── LOGO SIDE ── */}
-            <div style={styles.photoContainer}>
+            {/* ── RIGHT: Logo ── */}
+            <div className="hero-image" style={{ flexShrink: 0 }}>
               <img 
-                src={GRC_ICON_PHOTO} 
+                src={GRC_ICON_PHOTO}
                 alt="GRC Logo" 
-                style={styles.photoImg} 
+                style={{ 
+                  width: 'clamp(260px, 33vw, 440px)',
+                  height: 'clamp(260px, 33vw, 440px)',
+                  objectFit: 'contain',
+                  filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.3))',
+                }} 
               />
             </div>
 
@@ -188,10 +231,15 @@ export default function Achievements() {
 
 function GalleryRow() {
   return (
-    <div style={styles.galleryGrid}>
-      <div style={styles.galleryCard} />
-      <div style={styles.galleryCard} />
-      <div style={styles.galleryCard} />
+    <div style={{
+      display: 'grid', 
+      gridTemplateColumns: '1fr 1.3fr 1fr', 
+      gap: '16px', 
+      marginBottom: '16px'
+    }}>
+      <div style={{ backgroundColor: 'rgba(255,255,255,0.15)', borderRadius: '10px', height: '200px' }} />
+      <div style={{ backgroundColor: 'rgba(255,255,255,0.15)', borderRadius: '10px', height: '200px' }} />
+      <div style={{ backgroundColor: 'rgba(255,255,255,0.15)', borderRadius: '10px', height: '200px' }} />
     </div>
   );
 }
