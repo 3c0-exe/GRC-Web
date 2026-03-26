@@ -52,6 +52,12 @@ const styles = {
     position: 'absolute', inset: 0, opacity: 0.06, pointerEvents: 'none',
     backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
     backgroundSize: '200px 200px',
+  },
+  socialIcon: {
+    width: '32px',
+    height: '32px',
+    transition: 'transform 0.2s ease',
+    cursor: 'pointer'
   }
 };
 
@@ -81,7 +87,7 @@ export default function Home() {
 
           <div style={{ flexShrink: 0 }}>
             <img 
-              src="path-to-your-rce-medallion.png" 
+              src="src/img/RCE logo.png" 
               alt="RCE Medallion" 
               style={{ 
                 width: '500px', 
@@ -89,7 +95,6 @@ export default function Home() {
                 objectFit: 'contain',
                 filter: 'drop-shadow(0 10px 25px rgba(0,0,0,0.25))' 
               }} 
-              onError={(e) => { e.target.src = "src/img/RCE logo.png" }}
             />
           </div>
         </div>
@@ -113,19 +118,15 @@ export default function Home() {
       {/* ── ABOUT US SECTION ── */}
       <section style={{ backgroundColor: 'white', padding: '10px 35px 100px', marginLeft: '100px' }}>
         <div style={{ ...styles.sectionMax, display: 'flex', alignItems: 'center', gap: '200px', flexWrap: 'wrap' }}>
-          
-          {/* GRC Icon Image - ENLARGED */}
           <div style={{ flexShrink: 0, flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '400px' }}>
             <img 
-              src={"grcIcon"} // Replace with {grcIcon}
+              src="src/img/grc logo.png" 
               alt="GRC Icon"
               style={{ 
-                width: '450px', // Increased size
-                maxWidth: '450%', // Ensure it doesn't overflow on smaller screens
-                height: '450px', // Increased size
+                width: '450px', 
+                height: '450px', 
                 objectFit: 'contain' 
               }}
-              onError={(e) => { e.target.style.opacity = "0.2"; e.target.src="src/img/grc logo.png" }}
             />
           </div>
 
@@ -159,7 +160,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── CONTACT FORM SECTION ── */}
+      {/* ── CONTACT & FOLLOW US SECTION ── */}
       <section style={{ background: `linear-gradient(135deg, #e0102e 0%, #9b0020 100%)`, padding: '80px 32px', position: 'relative', overflow: 'hidden' }}>
         <div style={styles.noiseOverlay} />
         <div style={{ ...styles.sectionMax, position: 'relative', zIndex: 1 }}>
@@ -170,10 +171,25 @@ export default function Home() {
           </div>
 
           <div style={{ display: 'flex', gap: '56px', flexWrap: 'wrap' }}>
-            <div style={{ flex: 1, minWidth: '240px', display: 'flex', flexDirection: 'column', gap: '22px' }}>
-               <ContactInfo icon="📍" text="GRC Building, Caloocan, Philippines" />
-               <ContactInfo icon="📞" text="0999-999-9999" />
-               <ContactInfo icon="✉️" text="rceassistextension0104@gmail.com" />
+            {/* Contact Details & Follow Us */}
+            <div style={{ flex: 1, minWidth: '240px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
+               <div>
+                  <ContactInfo icon="📍" text="GRC Building, Caloocan, Philippines" />
+                  <ContactInfo icon="📞" text="0999-999-9999" />
+                  <ContactInfo icon="✉️" text="rceassistextension0104@gmail.com" />
+               </div>
+
+               {/* FOLLOW US NAVIGATION */}
+               <div style={{ borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '24px' }}>
+                  <p style={{ color: 'white', fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '0.1em' }}>Follow Us</p>
+                  <div style={{ display: 'flex', gap: '20px' }}>
+                    {/* Replace '#' with your actual social media links */}
+                    <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="FB" style={styles.socialIcon} /></a>
+                    <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="IG" style={styles.socialIcon} /></a>
+                    <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" style={styles.socialIcon} /></a>
+                    <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="IN" style={styles.socialIcon} /></a>
+                  </div>
+               </div>
             </div>
 
             <div style={{ flex: 1.3, minWidth: '280px' }}>
@@ -200,9 +216,9 @@ export default function Home() {
 
 function ContactInfo({ icon, text }) {
   return (
-    <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
+    <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start', marginBottom: '15px' }}>
       <span style={{ fontSize: '18px' }}>{icon}</span>
-      <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '13px', lineHeight: 1.7 }}>{text}</p>
+      <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '13px', lineHeight: 1.7, margin: 0 }}>{text}</p>
     </div>
   );
 }
