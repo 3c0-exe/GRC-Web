@@ -1,7 +1,8 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 
-// import grcLogo from '../assets/grc-logo.png'
+// 1. Ensure this path points to your actual logo file
+import grcLogo from '../img/logo.png'
 
 const GRC_RED = '#C8102E'
 
@@ -38,7 +39,21 @@ export default function Navbar() {
 
   return (
     <>
-      {/* DESKTOP */}
+      {/* Injecting a small responsive style for the logo */}
+      <style>
+        {`
+          .nav-logo {
+            height: 48px; /* Desktop height */
+            transition: height 0.3s ease;
+          }
+          @media (max-width: 768px) {
+            .nav-logo {
+              height: 36px; /* Mobile height */
+            }
+          }
+        `}
+      </style>
+
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
         backgroundColor: 'white',
@@ -47,21 +62,19 @@ export default function Navbar() {
         transform: visible ? 'translateY(0)' : 'translateY(-100%)',
         fontFamily: "'Poppins', sans-serif",
       }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '64px' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '64px' }}>
 
-          {/* Logo */}
-          <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            {/* Replace with: <img src={grcLogo} alt="GRC Logo" style={{ height: '40px', objectFit: 'contain' }} /> */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <div style={{ width: '36px', height: '36px', borderRadius: '50%', backgroundColor: GRC_RED, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ color: 'white', fontSize: '11px', fontWeight: 800 }}>GRC</span>
-              </div>
-              <div style={{ lineHeight: 1.2 }}>
-                <p style={{ color: GRC_RED, fontSize: '11px', fontWeight: 800, margin: 0 }}>Global</p>
-                <p style={{ color: GRC_RED, fontSize: '11px', fontWeight: 800, margin: 0 }}>Reciprocal</p>
-                <p style={{ color: GRC_RED, fontSize: '11px', fontWeight: 800, margin: 0 }}>Colleges</p>
-              </div>
-            </div>
+          {/* Responsive Logo */}
+          <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+            <img 
+              src={grcLogo} 
+              className="nav-logo"
+              alt="Global Reciprocal Colleges" 
+              style={{ 
+                width: 'auto', 
+                objectFit: 'contain' 
+              }} 
+            />
           </Link>
 
           {/* Desktop nav links */}
@@ -109,7 +122,7 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div style={{ backgroundColor: 'white', borderTop: '1px solid #f0f0f0', padding: '16px 32px 24px' }} className="lg:hidden">
+          <div style={{ backgroundColor: 'white', borderTop: '1px solid #f0f0f0', padding: '16px 20px 24px' }} className="lg:hidden">
             <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '4px' }}>
               {navLinks.map((link) => (
                 <li key={link.path}>
