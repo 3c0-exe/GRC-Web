@@ -1,128 +1,56 @@
-// Hero section
-const HERO_BG_IMAGE = "src/img/schoool_Image_aeq4ijaeq4ijaeq4.png";
-const HERO_BG_WIDTH = 600;
-const HERO_BG_HEIGHT = 600;
-const HERO_IMAGE = "src/img/head.1-removebg-preview.png";
-const HERO_IMG_WIDTH = 350;
+// ─────────────────────────────────────────────────────────────────────────────
+// ABOUT US PAGE
+// ─────────────────────────────────────────────────────────────────────────────
 
-// RCE Entrepreneur section
-const RCE_BG_IMAGE = "src/img/grc logo.png";
-const RCE_BG_WIDTH = 480;
-const RCE_IMAGE = "src/img/dean-removebg-preview.png";
-const RCE_IMG_WIDTH = 260;
+// ── IMAGES ──
+const HERO_BG_PHOTO  = "src/img/schoool_Image_aeq4ijaeq4ijaeq4.png";
+const HERO_PORTRAIT  = "src/img/head.1-removebg-preview.png";
+const RCE_LOGO       = "src/img/grc logo.png";
+const DEAN_PORTRAIT  = "src/img/Image1-removebg-preview.png";
 
-// Professors section
+// ── COLORS ──
+const RED   = '#C8102E';
+const DKRED = '#8B0000';
+
+// ── DATA ──
 const PROFESSORS = [
-  { id: 1, name: "Profile", highlight: false, image: "src/img/sam.png" },
-  { id: 2, name: "Samuel Cubacub", highlight: true, image: "src/img/sam.png" },
-  { id: 3, name: "Jay Evangelista", highlight: false, image: "src/img/sam.png" },
+  { id: 1, name: "Profile",          highlight: false, image: "src/img/sam.png" },
+  { id: 2, name: "Samuel Cubacub",   highlight: true,  image: "src/img/sam.png" },
+  { id: 3, name: "Jay Evangelista",  highlight: false, image: "src/img/sam.png" },
 ];
 
-// Student Assistants
 const SENIOR_SAS = [
   { id: 1, name: "Romeroso", label: "SENIOR S.A", highlight: false, image: "src/img/sam.png" },
-  { id: 2, name: "Dela Cruz", label: "SENIOR S.A", highlight: true, image: "src/img/sam.png" },
-  { id: 3, name: "Bautista", label: "SENIOR S.A", highlight: false, image: "src/img/sam.png" },
+  { id: 2, name: "Dela Cruz", label: "SENIOR S.A", highlight: true,  image: "src/img/sam.png" },
+  { id: 3, name: "Bautista",  label: "SENIOR S.A", highlight: false, image: "src/img/sam.png" },
 ];
+
 const NEW_SAS = [
   { id: 1, name: "Romeroso", label: "NEW S.A", image: "src/img/sam.png" },
   { id: 2, name: "Romeroso", label: "NEW S.A", image: "src/img/sam.png" },
-  { id: 3, name: "Mendoza", label: "NEW S.A", image: "src/img/sam.png" },
-  { id: 4, name: "Garcia", label: "NEW S.A", image: "src/img/sam.png" },
+  { id: 3, name: "Mendoza",  label: "NEW S.A", image: "src/img/sam.png" },
+  { id: 4, name: "Garcia",   label: "NEW S.A", image: "src/img/sam.png" },
 ];
 
-function Silhouette({ width, height, color = "rgba(255,255,255,0.35)" }) {
-  return (
-    <svg width={width * 0.55} height={height * 0.78} viewBox="0 0 24 32" fill="none">
-      <circle cx="12" cy="7" r="5" fill={color} />
-      <path d="M1 32c0-6.075 4.925-11 11-11s11 4.925 11 11" fill={color} />
-    </svg>
-  );
-}
-
-function SectionPortrait({
-  bgImage,
-  bgWidth = 500,
-  bgHeight = "100%",
-  personImage,
-  personWidth = 260,
-  height = 420,
-  opacity = 0.1,
-  silhouetteColor = "rgba(255,255,255,0.35)",
-}) {
-  const personHeight = Math.round(personWidth * 1.55);
-
-  return (
-    <div style={{
-      position: "relative",
-      width: bgWidth,
-      height,
-      flexShrink: 0,
-      display: "flex",
-      alignItems: "flex-end",
-      justifyContent: "center",
-    }}>
-      {bgImage && (
-        <img
-          src={bgImage}
-          alt=""
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: bgHeight,
-            objectFit: "cover",
-            objectPosition: "center",
-            borderRadius: 2,
-            pointerEvents: "none",
-            opacity: opacity
-          }}
-        />
-      )}
-
-      <div style={{
-        position: "relative",
-        zIndex: 2,
-        width: personWidth,
-        height: personHeight,
-        display: "flex",
-        alignItems: "flex-end",
-        justifyContent: "center",
-      }}>
-        {personImage ? (
-          <img
-            src={personImage}
-            alt="portrait"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-              objectPosition: "bottom",
-              display: "block",
-            }}
-          />
-        ) : (
-          <Silhouette width={personWidth} height={personHeight} color={silhouetteColor} />
-        )}
-      </div>
-    </div>
-  );
-}
+// ─────────────────────────────────────────────────────────────────────────────
+// SMALL REUSABLE COMPONENTS
+// ─────────────────────────────────────────────────────────────────────────────
 
 function PortraitCard({ image, width = 140, borderRadius = 10 }) {
   const height = Math.round(width * 1.42);
   return (
     <div style={{
-      width, height, borderRadius, overflow: "hidden", flexShrink: 0,
-      background: "linear-gradient(160deg,#7f1d1d 0%,#450a0a 100%)",
-      display: "flex", alignItems: "flex-end", justifyContent: "center",
+      width, height, borderRadius,
+      overflow: "hidden",
+      flexShrink: 0,
+      background: "linear-gradient(160deg, #7f1d1d 0%, #450a0a 100%)",
+      display: "flex",
+      alignItems: "flex-end",
+      justifyContent: "center",
     }}>
-      {image ? (
+      {image && (
         <img src={image} alt="profile"
           style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-      ) : (
-        <Silhouette width={width} height={height} color="rgba(255,255,255,0.28)" />
       )}
     </div>
   );
@@ -134,9 +62,10 @@ function ProfCard({ person }) {
     <div style={{
       display: "flex", flexDirection: "column", alignItems: "center",
       borderRadius: 16,
-      border: highlight ? "2px solid rgba(255,255,255,0.38)" : "2px solid rgba(255,255,255,0.1)",
+      border: `2px solid ${highlight ? "rgba(255,255,255,0.38)" : "rgba(255,255,255,0.1)"}`,
       background: highlight ? "rgba(255,255,255,0.14)" : "rgba(255,255,255,0.05)",
-      padding: "24px 20px 20px", gap: 14,
+      padding: "24px 20px 20px",
+      gap: 14,
       transform: highlight ? "translateY(-14px)" : "none",
       boxShadow: highlight ? "0 18px 52px rgba(0,0,0,0.5)" : "none",
     }}>
@@ -146,18 +75,18 @@ function ProfCard({ person }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// SA Card
-// ─────────────────────────────────────────────────────────────────────────────
 function SACard({ person }) {
   const { name, label, highlight, image } = person;
   return (
     <div style={{
       display: "flex", flexDirection: "column", alignItems: "center",
       borderRadius: 16,
-      border: highlight ? "2px solid #ef4444" : "2px solid rgba(255,255,255,0.09)",
-      background: highlight ? "linear-gradient(160deg,#dc2626 0%,#991b1b 100%)" : "rgba(255,255,255,0.04)",
-      padding: "16px 14px 22px", gap: 12,
+      border: `2px solid ${highlight ? "#ef4444" : "rgba(255,255,255,0.09)"}`,
+      background: highlight
+        ? "linear-gradient(160deg, #dc2626 0%, #991b1b 100%)"
+        : "rgba(255,255,255,0.04)",
+      padding: "16px 14px 22px",
+      gap: 12,
       boxShadow: highlight ? "0 8px 36px rgba(220,38,38,0.55)" : "none",
     }}>
       {label && (
@@ -175,71 +104,120 @@ function SACard({ person }) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Main
+// MAIN PAGE
 // ─────────────────────────────────────────────────────────────────────────────
 export default function AboutUs() {
   return (
-    <main style={{ minHeight: "100vh", fontFamily: "'Segoe UI', system-ui, sans-serif" }}>
+    <main style={{ minHeight: "100vh", fontFamily: "'Poppins', sans-serif" }}>
 
-      {/* ── HERO ──────────────────────────────────────────────────────────────── */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap');
+
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(28px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .hero-eyebrow { animation: fadeUp 0.6s ease both; animation-delay: 0.1s; }
+        .hero-heading { animation: fadeUp 0.7s ease both; animation-delay: 0.25s; }
+        .hero-divider { animation: fadeUp 0.6s ease both; animation-delay: 0.42s; }
+        .hero-body    { animation: fadeUp 0.6s ease both; animation-delay: 0.55s; }
+        .hero-name    { animation: fadeUp 0.6s ease both; animation-delay: 0.68s; }
+        .hero-image   { animation: fadeUp 0.8s ease both; animation-delay: 0.3s; }
+      `}</style>
+
+      {/* ── HERO ─────────────────────────────────────────────────────────────── */}
       <section style={{
-        background: "linear-gradient(135deg,#7f1d1d 0%,#b91c1c 45%,#dc2626 75%,#991b1b 100%)",
         position: "relative",
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
         overflow: "hidden",
       }}>
-        {/* diagonal stripe texture */}
         <div style={{
-          position: "absolute", inset: 0, opacity: 0.06, pointerEvents: "none",
-          backgroundImage: "repeating-linear-gradient(135deg,#fff 0,#fff 1px,transparent 0,transparent 18px)",
-          backgroundSize: "26px 26px",
+          position: "absolute", inset: 0,
+          backgroundImage: `url(${HERO_BG_PHOTO})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          zIndex: 0,
+        }} />
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(139,0,0,0.4) 60%, rgba(200,16,46,0.2) 100%)",
+          zIndex: 1,
+        }} />
+        <div style={{
+          position: "absolute", bottom: 0, left: 0, right: 0,
+          height: 6, backgroundColor: DKRED, zIndex: 2,
         }} />
 
         <div style={{
-          position: "relative",
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "120px 48px 0",
+          position: "relative", zIndex: 3,
+          maxWidth: 1200, margin: "0 auto",
+          padding: "0 48px", width: "100%",
           display: "flex",
           alignItems: "flex-end",
           justifyContent: "space-between",
-          gap: 48,
+          gap: 40, flexWrap: "wrap",
         }}>
-          {/* Text */}
-          <div style={{ flex: 1, minWidth: 0, paddingBottom: 64, alignSelf: "center" }}>
-            <h1 style={{
-              fontSize: "clamp(2.2rem,4.5vw,3.8rem)",
-              fontWeight: 900, color: "#fff", lineHeight: 1.1, margin: 0,
-              textShadow: "0 2px 16px rgba(0,0,0,0.4)",
+          {/* Left — Text */}
+          <div style={{ flex: 1, minWidth: 300, maxWidth: 540, paddingBottom: 60 }}>
+            <div className="hero-eyebrow" style={{ display: "inline-flex", alignItems: "center", gap: 12, marginBottom: 32 }}>
+              <span style={{ display: "block", width: 40, height: 2, backgroundColor: RED }} />
+              <span style={{ color: "rgba(255,255,255,0.65)", fontSize: 11, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase" }}>
+                About Us
+              </span>
+            </div>
+            <h1 className="hero-heading" style={{
+              fontFamily: "'Times New Roman', Times, serif",
+              color: "white",
+              fontSize: "clamp(38px, 5.5vw, 70px)",
+              fontWeight: 900, lineHeight: 1.08,
+              letterSpacing: "-0.01em", margin: 0,
             }}>
-              Built on Integrity,<br />
-              Bound by<br />
-              Community.
+              Built on <span style={{ fontStyle: "italic", color: RED }}>Integrity,</span>
+              <br />Bound by Community.
             </h1>
-            <p style={{ marginTop: 22, color: "#fca5a5", fontSize: 14, lineHeight: 1.75, maxWidth: 380 }}>
+            <div className="hero-divider" style={{ display: "flex", alignItems: "center", gap: 10, margin: "36px 0", maxWidth: 340 }}>
+              <span style={{ flex: 1, height: 1, backgroundColor: "rgba(255,255,255,0.18)" }} />
+              <span style={{ width: 5, height: 5, borderRadius: "50%", backgroundColor: RED, flexShrink: 0 }} />
+              <span style={{ flex: 1, height: 1, backgroundColor: "rgba(255,255,255,0.18)" }} />
+            </div>
+            <p className="hero-body" style={{
+              color: "rgba(255,255,255,0.78)", fontSize: 16, lineHeight: 1.9,
+              maxWidth: 460, margin: 0,
+            }}>
               Leaders in transformative research and grassroots extension.
               Building knowledge. Empowering communities. Changing lives.
             </p>
-            <p style={{ marginTop: 32, color: "#fff", fontWeight: 800, fontSize: 15, letterSpacing: "0.13em", textTransform: "uppercase" }}>
-              MRS. FRANCIS BEJOSA
-            </p>
           </div>
 
-          <SectionPortrait
-            bgImage={HERO_BG_IMAGE}
-            bgWidth={HERO_BG_WIDTH}
-            bgHeight={HERO_BG_HEIGHT}
-            personImage={HERO_IMAGE}
-            personWidth={HERO_IMG_WIDTH}
-            height={400}
-            opacity={0.25}
-            silhouetteColor="rgba(255,255,255,0.4)"
-          />
+          {/* Right — Portrait + name tag */}
+          <div className="hero-image" style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <img
+              src={HERO_PORTRAIT}
+              alt="MRS. FRANCIS BEJOSA"
+              style={{
+                width: "clamp(340px, 38vw, 560px)",
+                height: "auto", maxHeight: "88vh",
+                objectFit: "contain", objectPosition: "bottom",
+                display: "block", marginBottom: 0,
+              }}
+            />
+            <div className="hero-name" style={{
+              backgroundColor: RED, padding: "10px 28px",
+              width: "100%", textAlign: "center",
+            }}>
+              <p style={{ margin: 0, color: "white", fontWeight: 800, fontSize: 13, letterSpacing: "0.18em", textTransform: "uppercase" }}>
+                MRS. FRANCIS BEJOSA
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ── PROFESSORS ────────────────────────────────────────────────────────── */}
       <section style={{
-        background: "linear-gradient(180deg,#cc1f1f 0%,#a81818 100%)",
+        background: "linear-gradient(180deg, #cc1f1f 0%, #a81818 100%)",
         padding: "64px 48px 88px",
       }}>
         <h2 style={{
@@ -250,59 +228,105 @@ export default function AboutUs() {
         </h2>
         <div style={{
           maxWidth: 860, margin: "0 auto",
-          display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24, alignItems: "end",
+          display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24, alignItems: "end",
         }}>
-          {PROFESSORS.map((p) => <ProfCard key={p.id} person={p} />)}
+          {PROFESSORS.map((prof) => <ProfCard key={prof.id} person={prof} />)}
         </div>
       </section>
 
       {/* ── RCE ENTREPRENEUR ──────────────────────────────────────────────────── */}
-      <section style={{ background: "#fff", overflow: "hidden" }}>
+      {/* Full-screen white section — portrait left, text right, fills 100vw */}
+      <section style={{
+        background: "#fff",
+        minHeight: "100vh",
+        width: "100%",
+        display: "flex",
+        alignItems: "stretch",
+        overflow: "hidden",
+      }}>
+
+        {/* Left — portrait flush to edges, takes up ~45% of screen */}
         <div style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          padding: "72px 48px 0",
+          width: "45%",
+          minWidth: 300,
+          flexShrink: 0,
           display: "flex",
           alignItems: "flex-end",
-          gap: 64,
+          justifyContent: "center",
+          overflow: "hidden",
+          backgroundColor: "#f9f9f9",
         }}>
-          <SectionPortrait
-            bgImage={RCE_BG_IMAGE}
-            bgWidth={RCE_BG_WIDTH}
-            personImage={RCE_IMAGE}
-            personWidth={RCE_IMG_WIDTH}
-            height={440}
-            opacity={1}
-            silhouetteColor="#94a3b8"
+          <img
+            src={DEAN_PORTRAIT}
+            alt="MRS. WILMA CARIDAD TOLENTINO"
+            style={{
+              width: "100%",
+              maxWidth: 600,
+              height: "90vh",
+              objectFit: "contain",
+              objectPosition: "bottom",
+              display: "block",
+            }}
           />
+        </div>
 
-          {/* Text */}
-          <div style={{ flex: 1, minWidth: 0, paddingBottom: 72, alignSelf: "center" }}>
+        {/* Right — text, takes up remaining ~55% */}
+        <div style={{
+          flex: 1,
+          display: "flex",
+          alignItems: "center",
+          padding: "80px 64px",
+        }}>
+          <div>
+            {/* Section eyebrow */}
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 12, marginBottom: 28 }}>
+              <span style={{ display: "block", width: 40, height: 2, backgroundColor: RED }} />
+              <span style={{ color: RED, fontSize: 11, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" }}>
+                Leadership
+              </span>
+            </div>
+
             <h2 style={{
-              fontSize: "clamp(1.6rem,3vw,2.5rem)", fontWeight: 900, margin: 0, letterSpacing: "0.03em",
+              fontFamily: "'Times New Roman', Times, serif",
+              fontSize: "clamp(1.8rem, 3.5vw, 3rem)",
+              fontWeight: 900, margin: 0, letterSpacing: "0.02em", lineHeight: 1.1,
             }}>
               <span style={{ color: "#111" }}>THE </span>
-              <span style={{ color: "#dc2626" }}>RCE</span>
-              <span style={{ color: "#111" }}> ENTREPRENEUR</span>
+              <span style={{ color: RED }}>RCE</span>
+              <br />
+              <span style={{ color: "#111" }}>ENTREPRENEUR</span>
             </h2>
-            <p style={{ marginTop: 20, color: "#4b5563", fontSize: 14, lineHeight: 1.85, maxWidth: 480 }}>
+
+            {/* Divider */}
+            <div style={{ display: "flex", alignItems: "center", gap: 10, margin: "28px 0", maxWidth: 300 }}>
+              <span style={{ flex: 1, height: 1, backgroundColor: "#e5e7eb" }} />
+              <span style={{ width: 5, height: 5, borderRadius: "50%", backgroundColor: RED, flexShrink: 0 }} />
+              <span style={{ flex: 1, height: 1, backgroundColor: "#e5e7eb" }} />
+            </div>
+
+            <p style={{ color: "#4b5563", fontSize: 15, lineHeight: 1.9, maxWidth: 480, marginBottom: 36 }}>
               The person who started the journey of helping people and having care at the soul of
               their work has now seen that vision bloom into RCE. What began as a single act of
               kindness is now a pillar of hope for our community.
             </p>
+
+            {/* Name with underline accent */}
             <p style={{
-              marginTop: 32, color: "#b91c1c", fontWeight: 800, fontSize: 15,
+              color: "#b91c1c", fontWeight: 800, fontSize: 15,
               letterSpacing: "0.1em", textTransform: "uppercase",
-              borderBottom: "2.5px solid #b91c1c", display: "inline-block", paddingBottom: 5,
+              borderBottom: "2.5px solid #b91c1c",
+              display: "inline-block", paddingBottom: 6, margin: 0,
             }}>
               MRS. WILMA CARIDAD TOLENTINO
             </p>
           </div>
         </div>
+
       </section>
 
+      {/* ── STUDENT ASSISTANTS ────────────────────────────────────────────────── */}
       <section style={{
-        background: "linear-gradient(180deg,#1c1c1c 0%,#0f0f0f 100%)",
+        background: "linear-gradient(180deg, #1c1c1c 0%, #0f0f0f 100%)",
         padding: "68px 48px 88px",
       }}>
         <h2 style={{
@@ -312,23 +336,17 @@ export default function AboutUs() {
           Student Assistants
         </h2>
         <div style={{ display: "flex", justifyContent: "center", marginBottom: 52 }}>
-          <div style={{ width: 64, height: 3, background: "#dc2626", borderRadius: 4 }} />
+          <div style={{ width: 64, height: 3, background: RED, borderRadius: 4 }} />
         </div>
 
-        {/* Senior SA */}
-        <div style={{
-          maxWidth: 860, margin: "0 auto 28px",
-          display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 22,
-        }}>
-          {SENIOR_SAS.map((s) => <SACard key={s.id} person={s} />)}
+        {/* Senior SAs — 3 columns */}
+        <div style={{ maxWidth: 860, margin: "0 auto 28px", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 22 }}>
+          {SENIOR_SAS.map((sa) => <SACard key={sa.id} person={sa} />)}
         </div>
 
-        {/* New SA */}
-        <div style={{
-          maxWidth: 860, margin: "0 auto",
-          display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 22,
-        }}>
-          {NEW_SAS.map((s) => <SACard key={s.id} person={s} />)}
+        {/* New SAs — 4 columns */}
+        <div style={{ maxWidth: 860, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 22 }}>
+          {NEW_SAS.map((sa) => <SACard key={sa.id} person={sa} />)}
         </div>
       </section>
 

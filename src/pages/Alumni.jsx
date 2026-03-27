@@ -102,7 +102,7 @@ export default function Alumni() {
   return (
     <div style={{ fontFamily: "'Poppins', sans-serif" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Poppins:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
         input::placeholder { color: rgba(255,255,255,0.55); }
         input:focus { border-color: rgba(255,255,255,0.6); background-color: rgba(255,255,255,0.18); }
@@ -163,16 +163,16 @@ export default function Alumni() {
             </span>
           </div>
 
-          {/* Heading */}
+          {/* Heading — Times New Roman */}
           <h1 className="hero-heading" style={{
-            fontFamily: "'Playfair Display', Georgia, serif",
+            fontFamily: "'Times New Roman', Times, serif",
             color: 'white',
             fontSize: 'clamp(38px, 5.5vw, 70px)',
             fontWeight: 900,
             lineHeight: 1.08,
             letterSpacing: '-0.01em',
             maxWidth: '740px',
-            margin: '0 0 0 0',
+            margin: '0',
           }}>
             Securing Our Legacy,{' '}
             <br />
@@ -278,7 +278,7 @@ export default function Alumni() {
                   Clear Form
                 </button>
                 <button type="submit" style={styles.button}>
-                  Submit Application
+                  Submit!
                 </button>
               </div>
             </form>

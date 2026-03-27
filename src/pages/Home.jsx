@@ -55,7 +55,7 @@ export default function Home() {
   return (
     <div style={styles.container}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Poppins:wght@400;500;600;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap');
 
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(28px); }
@@ -113,9 +113,9 @@ export default function Home() {
               </span>
             </div>
 
-            {/* Heading */}
+            {/* Heading — Times New Roman */}
             <h1 className="hero-heading" style={{
-              fontFamily: "'Playfair Display', Georgia, serif",
+              fontFamily: "'Times New Roman', Times, serif",
               color: 'white',
               fontSize: 'clamp(38px, 5vw, 66px)',
               fontWeight: 900,

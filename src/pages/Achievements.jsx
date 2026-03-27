@@ -33,18 +33,6 @@ const styles = {
     border: '1px solid rgba(200,16,46,0.08)' 
   },
 
-  galleryGrid: { 
-    display: 'grid', 
-    gridTemplateColumns: '1fr 1.3fr 1fr', 
-    gap: '16px', 
-    marginBottom: '16px' 
-  },
-  galleryCard: { 
-    backgroundColor: 'rgba(255,255,255,0.15)', 
-    borderRadius: '10px', 
-    height: '200px' 
-  },
-
   noise: { 
     position: 'absolute', inset: 0, opacity: 0.06, 
     backgroundImage: NOISE, backgroundSize: '200px 200px', pointerEvents: 'none' 
@@ -55,7 +43,7 @@ export default function Achievements() {
   return (
     <div style={styles.container}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Poppins:wght@400;500;600;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap');
 
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(28px); }
@@ -115,9 +103,9 @@ export default function Achievements() {
                 </span>
               </div>
 
-              {/* Heading */}
+              {/* Heading — Times New Roman */}
               <h1 className="hero-heading" style={{
-                fontFamily: "'Playfair Display', Georgia, serif",
+                fontFamily: "'Times New Roman', Times, serif",
                 color: 'white',
                 fontSize: 'clamp(38px, 5vw, 66px)',
                 fontWeight: 900,
