@@ -277,7 +277,7 @@ export default function AboutUs() {
           alignItems: "center",
           padding: "80px 64px",
         }}>
-          <div>
+          <div style={{ marginLeft: 70 }}>
             {/* Section eyebrow */}
             <div style={{ display: "inline-flex", alignItems: "center", gap: 12, marginBottom: 28 }}>
               <span style={{ display: "block", width: 40, height: 2, backgroundColor: RED }} />
@@ -304,7 +304,7 @@ export default function AboutUs() {
               <span style={{ flex: 1, height: 1, backgroundColor: "#e5e7eb" }} />
             </div>
 
-            <p style={{ color: "#4b5563", fontSize: 15, lineHeight: 1.9, maxWidth: 480, marginBottom: 36 }}>
+            <p style={{ color: "#4b5563", fontSize: 15, lineHeight: 1.9, maxWidth: 600, marginBottom: 36 }}>
               The person who started the journey of helping people and having care at the soul of
               their work has now seen that vision bloom into RCE. What began as a single act of
               kindness is now a pillar of hope for our community.
