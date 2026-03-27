@@ -133,8 +133,6 @@ export default function AboutUs() {
         alignItems: "center",
         overflow: "hidden",
       }}>
-
-        {/* Layer 1 — Background photo */}
         <div style={{
           position: "absolute", inset: 0,
           backgroundImage: `url(${HERO_BG_PHOTO})`,
@@ -142,61 +140,48 @@ export default function AboutUs() {
           backgroundPosition: "center",
           zIndex: 0,
         }} />
-
-        {/* Layer 2 — Dark red tint overlay */}
         <div style={{
           position: "absolute", inset: 0,
           background: "linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(139,0,0,0.4) 60%, rgba(200,16,46,0.2) 100%)",
           zIndex: 1,
         }} />
-
-        {/* Layer 3 — Bottom accent line */}
         <div style={{
           position: "absolute", bottom: 0, left: 0, right: 0,
           height: 6, backgroundColor: DKRED, zIndex: 2,
         }} />
 
-        {/* Layer 4 — Hero content */}
         <div style={{
           position: "relative", zIndex: 3,
           maxWidth: 1200, margin: "0 auto",
           padding: "0 48px", width: "100%",
           display: "flex",
-          alignItems: "flex-end",       /* both columns sit on the bottom */
+          alignItems: "flex-end",
           justifyContent: "space-between",
-          gap: 40,
-          flexWrap: "wrap",
+          gap: 40, flexWrap: "wrap",
         }}>
-
-          {/* ── LEFT — Text (pushed down so it's centered vertically) ── */}
+          {/* Left — Text */}
           <div style={{ flex: 1, minWidth: 300, maxWidth: 540, paddingBottom: 60 }}>
-
             <div className="hero-eyebrow" style={{ display: "inline-flex", alignItems: "center", gap: 12, marginBottom: 32 }}>
               <span style={{ display: "block", width: 40, height: 2, backgroundColor: RED }} />
               <span style={{ color: "rgba(255,255,255,0.65)", fontSize: 11, fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase" }}>
                 About Us
               </span>
             </div>
-
             <h1 className="hero-heading" style={{
               fontFamily: "'Times New Roman', Times, serif",
               color: "white",
               fontSize: "clamp(38px, 5.5vw, 70px)",
-              fontWeight: 900,
-              lineHeight: 1.08,
-              letterSpacing: "-0.01em",
-              margin: 0,
+              fontWeight: 900, lineHeight: 1.08,
+              letterSpacing: "-0.01em", margin: 0,
             }}>
               Built on <span style={{ fontStyle: "italic", color: RED }}>Integrity,</span>
               <br />Bound by Community.
             </h1>
-
             <div className="hero-divider" style={{ display: "flex", alignItems: "center", gap: 10, margin: "36px 0", maxWidth: 340 }}>
               <span style={{ flex: 1, height: 1, backgroundColor: "rgba(255,255,255,0.18)" }} />
               <span style={{ width: 5, height: 5, borderRadius: "50%", backgroundColor: RED, flexShrink: 0 }} />
               <span style={{ flex: 1, height: 1, backgroundColor: "rgba(255,255,255,0.18)" }} />
             </div>
-
             <p className="hero-body" style={{
               color: "rgba(255,255,255,0.78)", fontSize: 16, lineHeight: 1.9,
               maxWidth: 460, margin: 0,
@@ -206,50 +191,27 @@ export default function AboutUs() {
             </p>
           </div>
 
-          {/* ── RIGHT — Portrait with name tag below, flush to bottom ── */}
-          <div className="hero-image" style={{
-            flexShrink: 0,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}>
-
-            {/* Portrait — large, flush to bottom */}
+          {/* Right — Portrait + name tag */}
+          <div className="hero-image" style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
             <img
               src={HERO_PORTRAIT}
               alt="MRS. FRANCIS BEJOSA"
               style={{
                 width: "clamp(340px, 38vw, 560px)",
-                height: "auto",
-                maxHeight: "88vh",
-                objectFit: "contain",
-                objectPosition: "bottom",
-                display: "block",
-                marginBottom: 0,
+                height: "auto", maxHeight: "88vh",
+                objectFit: "contain", objectPosition: "bottom",
+                display: "block", marginBottom: 0,
               }}
             />
-
-            {/* Name tag — sits directly under the portrait, above the accent line */}
             <div className="hero-name" style={{
-              backgroundColor: RED,
-              padding: "10px 28px",
-              width: "100%",
-              textAlign: "center",
+              backgroundColor: RED, padding: "10px 28px",
+              width: "100%", textAlign: "center",
             }}>
-              <p style={{
-                margin: 0,
-                color: "white",
-                fontWeight: 800,
-                fontSize: 13,
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-              }}>
+              <p style={{ margin: 0, color: "white", fontWeight: 800, fontSize: 13, letterSpacing: "0.18em", textTransform: "uppercase" }}>
                 MRS. FRANCIS BEJOSA
               </p>
             </div>
-
           </div>
-
         </div>
       </section>
 
@@ -273,49 +235,93 @@ export default function AboutUs() {
       </section>
 
       {/* ── RCE ENTREPRENEUR ──────────────────────────────────────────────────── */}
-      <section style={{ background: "#fff", overflow: "hidden" }}>
+      {/* Full-screen white section — portrait left, text right, fills 100vw */}
+      <section style={{
+        background: "#fff",
+        minHeight: "100vh",
+        width: "100%",
+        display: "flex",
+        alignItems: "stretch",
+        overflow: "hidden",
+      }}>
+
+        {/* Left — portrait flush to edges, takes up ~45% of screen */}
         <div style={{
-          maxWidth: 1100, margin: "0 auto",
-          padding: "72px 48px 0",
-          display: "flex", alignItems: "flex-end", gap: 64, flexWrap: "wrap",
+          width: "45%",
+          minWidth: 300,
+          flexShrink: 0,
+          display: "flex",
+          alignItems: "flex-end",
+          justifyContent: "center",
+          overflow: "hidden",
+          backgroundColor: "#f9f9f9",
         }}>
+          <img
+            src={DEAN_PORTRAIT}
+            alt="MRS. WILMA CARIDAD TOLENTINO"
+            style={{
+              width: "100%",
+              maxWidth: 600,
+              height: "90vh",
+              objectFit: "contain",
+              objectPosition: "bottom",
+              display: "block",
+            }}
+          />
+        </div>
 
-          {/* Left — Single portrait only */}
-          <div style={{ flexShrink: 0 }}>
-            <img
-              src={DEAN_PORTRAIT}
-              alt="MRS. WILMA CARIDAD TOLENTINO"
-              style={{
-                width: "clamp(300px, 36vw, 520px)",
-                height: "auto",
-                objectFit: "contain",
-                objectPosition: "bottom",
-                display: "block",
-              }}
-            />
-          </div>
+        {/* Right — text, takes up remaining ~55% */}
+        <div style={{
+          flex: 1,
+          display: "flex",
+          alignItems: "center",
+          padding: "80px 64px",
+        }}>
+          <div>
+            {/* Section eyebrow */}
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 12, marginBottom: 28 }}>
+              <span style={{ display: "block", width: 40, height: 2, backgroundColor: RED }} />
+              <span style={{ color: RED, fontSize: 11, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase" }}>
+                Leadership
+              </span>
+            </div>
 
-          {/* Right — Text */}
-          <div style={{ flex: 1, minWidth: 280, paddingBottom: 72, alignSelf: "center" }}>
-            <h2 style={{ fontSize: "clamp(1.6rem, 3vw, 2.5rem)", fontWeight: 900, margin: 0, letterSpacing: "0.03em" }}>
+            <h2 style={{
+              fontFamily: "'Times New Roman', Times, serif",
+              fontSize: "clamp(1.8rem, 3.5vw, 3rem)",
+              fontWeight: 900, margin: 0, letterSpacing: "0.02em", lineHeight: 1.1,
+            }}>
               <span style={{ color: "#111" }}>THE </span>
               <span style={{ color: RED }}>RCE</span>
-              <span style={{ color: "#111" }}> ENTREPRENEUR</span>
+              <br />
+              <span style={{ color: "#111" }}>ENTREPRENEUR</span>
             </h2>
-            <p style={{ marginTop: 20, color: "#4b5563", fontSize: 14, lineHeight: 1.85, maxWidth: 480 }}>
+
+            {/* Divider */}
+            <div style={{ display: "flex", alignItems: "center", gap: 10, margin: "28px 0", maxWidth: 300 }}>
+              <span style={{ flex: 1, height: 1, backgroundColor: "#e5e7eb" }} />
+              <span style={{ width: 5, height: 5, borderRadius: "50%", backgroundColor: RED, flexShrink: 0 }} />
+              <span style={{ flex: 1, height: 1, backgroundColor: "#e5e7eb" }} />
+            </div>
+
+            <p style={{ color: "#4b5563", fontSize: 15, lineHeight: 1.9, maxWidth: 480, marginBottom: 36 }}>
               The person who started the journey of helping people and having care at the soul of
               their work has now seen that vision bloom into RCE. What began as a single act of
               kindness is now a pillar of hope for our community.
             </p>
+
+            {/* Name with underline accent */}
             <p style={{
-              marginTop: 32, color: "#b91c1c", fontWeight: 800, fontSize: 15,
+              color: "#b91c1c", fontWeight: 800, fontSize: 15,
               letterSpacing: "0.1em", textTransform: "uppercase",
-              borderBottom: "2.5px solid #b91c1c", display: "inline-block", paddingBottom: 5,
+              borderBottom: "2.5px solid #b91c1c",
+              display: "inline-block", paddingBottom: 6, margin: 0,
             }}>
               MRS. WILMA CARIDAD TOLENTINO
             </p>
           </div>
         </div>
+
       </section>
 
       {/* ── STUDENT ASSISTANTS ────────────────────────────────────────────────── */}
