@@ -265,7 +265,7 @@ export default function Home() {
                <div style={{ borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '24px' }}>
                   <p style={{ color: 'white', fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '0.1em' }}>Follow Us</p>
                   <div style={{ display: 'flex', gap: '20px' }}>
-                    <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="FB" style={styles.socialIcon} className="social-icon" /></a>
+                    <a href="https://www.facebook.com/GrcRCExtension" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="FB" style={styles.socialIcon} className="social-icon" /></a>
                     <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="IG" style={styles.socialIcon} className="social-icon" /></a>
                     <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" style={styles.socialIcon} className="social-icon" /></a>
                     <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="IN" style={styles.socialIcon} className="social-icon" /></a>
