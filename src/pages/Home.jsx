@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 
 const GRC_RED = '#C8102E';
 
@@ -51,6 +52,246 @@ const styles = {
   }
 };
 
+// ─────────────────────────────────────────────────────────────────────────────
+// INFORMATION CARDS DATA
+// ─────────────────────────────────────────────────────────────────────────────
+const INFO_CARDS = [
+  {
+    id: 1,
+    tag: "Research",
+    title: "Advancing Academic Research",
+    body: "The GRC Office spearheads cutting-edge research initiatives that address real-world problems. Our faculty and student researchers collaborate with industry partners to produce impactful, peer-reviewed studies that shape policy and practice.",
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+        <circle cx="17" cy="17" r="9" stroke="currentColor" strokeWidth="2.5"/>
+        <path d="M23.5 23.5L31 31" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+        <path d="M13 17h8M17 13v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+    accent: GRC_RED,
+    stat: "200+",
+    statLabel: "Published Studies",
+  },
+  {
+    id: 2,
+    tag: "Extension",
+    title: "Community Extension Programs",
+    body: "We believe education extends beyond the classroom. Our community extension programs deliver health, livelihood, and literacy services to underserved barangays — bridging the gap between academic knowledge and community need.",
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+        <path d="M20 8c-6.627 0-12 5.373-12 12 0 4.418 2.386 8.279 5.928 10.374" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+        <path d="M20 8c6.627 0 12 5.373 12 12a11.96 11.96 0 01-5.928 10.374" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+        <circle cx="20" cy="20" r="4" fill="currentColor"/>
+        <path d="M20 24v6M17 33h6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+      </svg>
+    ),
+    accent: "#b91c1c",
+    stat: "150+",
+    statLabel: "Barangays Reached",
+  },
+  {
+    id: 3,
+    tag: "Partnership",
+    title: "Industry & Academic Linkages",
+    body: "GRC fosters strong ties with government agencies, NGOs, and private sector partners. These collaborations open doors for student internships, faculty grants, and joint research projects that create measurable social impact.",
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+        <path d="M12 20c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+        <circle cx="8" cy="24" r="5" stroke="currentColor" strokeWidth="2.5"/>
+        <circle cx="32" cy="24" r="5" stroke="currentColor" strokeWidth="2.5"/>
+        <path d="M13 24h14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+      </svg>
+    ),
+    accent: "#991b1b",
+    stat: "80+",
+    statLabel: "Active Partners",
+  },
+  {
+    id: 4,
+    tag: "Innovation",
+    title: "Innovation & Technology Transfer",
+    body: "From prototype to deployment — the GRC Office supports faculty and student innovators in transforming research outputs into practical technologies. We facilitate IP registration, technology transfer, and startup incubation.",
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+        <path d="M20 6v4M20 30v4M6 20h4M30 20h4" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+        <circle cx="20" cy="20" r="8" stroke="currentColor" strokeWidth="2.5"/>
+        <path d="M16 18l3 3 5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    accent: "#7f1d1d",
+    stat: "25+",
+    statLabel: "Years of Impact",
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// NAV BUTTON (reused by carousel)
+// ─────────────────────────────────────────────────────────────────────────────
+function NavBtn({ onClick, children, dark = false }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <button
+      onClick={onClick}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        width: 44, height: 44, borderRadius: '50%',
+        border: `1.5px solid ${hov
+          ? (dark ? 'rgba(200,16,46,0.7)' : 'rgba(255,255,255,0.7)')
+          : (dark ? 'rgba(200,16,46,0.2)' : 'rgba(255,255,255,0.3)')}`,
+        background: hov
+          ? (dark ? 'rgba(200,16,46,0.1)' : 'rgba(255,255,255,0.2)')
+          : (dark ? 'rgba(200,16,46,0.04)' : 'rgba(255,255,255,0.08)'),
+        color: dark ? GRC_RED : '#fff',
+        fontSize: 20, cursor: 'pointer',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        transition: 'all 0.2s',
+      }}
+    >{children}</button>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// INFORMATION CAROUSEL
+// ─────────────────────────────────────────────────────────────────────────────
+function InfoCarousel() {
+  const [active, setActive] = useState(0);
+  const [dir, setDir] = useState('left');
+  const [animating, setAnimating] = useState(false);
+  const timerRef = useRef(null);
+  const count = INFO_CARDS.length;
+
+  useEffect(() => {
+    timerRef.current = setInterval(() => advance(1), 4500);
+    return () => clearInterval(timerRef.current);
+  }, [active]);
+
+  const advance = (d) => {
+    if (animating) return;
+    setDir(d > 0 ? 'left' : 'right');
+    setAnimating(true);
+    setTimeout(() => {
+      setActive((prev) => (prev + d + count) % count);
+      setAnimating(false);
+    }, 320);
+    clearInterval(timerRef.current);
+  };
+
+  const goTo = (i) => {
+    if (i === active || animating) return;
+    advance(i > active ? 1 : -1);
+    setTimeout(() => setActive(i), 320);
+  };
+
+  const card = INFO_CARDS[active];
+
+  return (
+    <div style={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
+      <style>{`
+        @keyframes slideInL  { from { opacity:0; transform:translateX(60px);  } to { opacity:1; transform:translateX(0); } }
+        @keyframes slideInR  { from { opacity:0; transform:translateX(-60px); } to { opacity:1; transform:translateX(0); } }
+        @keyframes slideOutL { from { opacity:1; transform:translateX(0); } to { opacity:0; transform:translateX(-60px); } }
+        @keyframes slideOutR { from { opacity:1; transform:translateX(0); } to { opacity:0; transform:translateX(60px);  } }
+        .ic-panel {
+          animation-duration: 0.36s;
+          animation-fill-mode: both;
+          animation-timing-function: cubic-bezier(0.4,0,0.2,1);
+        }
+        .ic-out-l { animation-name: slideOutL; }
+        .ic-out-r { animation-name: slideOutR; }
+        .ic-in-l  { animation-name: slideInL;  }
+        .ic-in-r  { animation-name: slideInR;  }
+        .ic-thumb { transition: all 0.25s ease; cursor: pointer; }
+        .ic-thumb:hover { background: rgba(200,16,46,0.09) !important; border-color: rgba(200,16,46,0.35) !important; }
+      `}</style>
+
+      <div style={{
+        display: 'flex', alignItems: 'stretch', borderRadius: 20, overflow: 'hidden',
+        boxShadow: '0 20px 70px rgba(0,0,0,0.10)',
+        minHeight: 420,
+        border: '1px solid rgba(200,16,46,0.07)',
+      }}>
+        {/* Left accent panel */}
+        <div
+          className={`ic-panel ${animating ? (dir === 'left' ? 'ic-out-l' : 'ic-out-r') : (dir === 'left' ? 'ic-in-l' : 'ic-in-r')}`}
+          style={{
+            width: '42%', position: 'relative', overflow: 'hidden',
+            background: `linear-gradient(145deg, ${card.accent} 0%, #6b0000 100%)`,
+            padding: '56px 48px',
+            display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+          }}
+        >
+          <div style={styles.noiseOverlay} />
+          {/* Decorative rings */}
+          <div style={{ position: 'absolute', bottom: -60, right: -60, width: 220, height: 220, borderRadius: '50%', border: '2px solid rgba(255,255,255,0.08)' }} />
+          <div style={{ position: 'absolute', bottom: -30, right: -30, width: 130, height: 130, borderRadius: '50%', border: '2px solid rgba(255,255,255,0.05)' }} />
+
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <span style={{ display: 'inline-block', color: 'rgba(255,255,255,0.5)', fontSize: 11, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', marginBottom: 32 }}>
+              {card.tag}
+            </span>
+            <div style={{ color: 'rgba(255,255,255,0.9)', marginBottom: 28 }}>{card.icon}</div>
+            <h3 style={{ fontFamily: "'Times New Roman', serif", color: '#fff', fontSize: 'clamp(22px, 2.5vw, 32px)', fontWeight: 900, lineHeight: 1.15, margin: 0 }}>
+              {card.title}
+            </h3>
+          </div>
+
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <p style={{ fontSize: 38, fontWeight: 900, color: '#fff', lineHeight: 1, margin: '0 0 4px', fontFamily: "'Times New Roman', serif" }}>{card.stat}</p>
+            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.12em', textTransform: 'uppercase', margin: 0 }}>{card.statLabel}</p>
+          </div>
+        </div>
+
+        {/* Right content panel */}
+        <div
+          className={`ic-panel ${animating ? (dir === 'left' ? 'ic-out-l' : 'ic-out-r') : (dir === 'left' ? 'ic-in-l' : 'ic-in-r')}`}
+          style={{ flex: 1, padding: '56px 52px', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#fff' }}
+        >
+          {/* Progress bar */}
+          <div style={{ display: 'flex', gap: 6, marginBottom: 44 }}>
+            {INFO_CARDS.map((_, i) => (
+              <div key={i} onClick={() => goTo(i)} style={{
+                flex: i === active ? 3 : 1, height: 4, borderRadius: 4,
+                background: i === active ? GRC_RED : 'rgba(200,16,46,0.15)',
+                transition: 'flex 0.45s ease, background 0.3s', cursor: 'pointer',
+              }} />
+            ))}
+          </div>
+
+          <p style={{ color: '#374151', fontSize: 'clamp(14px, 1.1vw, 16px)', lineHeight: 1.95, margin: '0 0 44px', maxWidth: 500 }}>
+            {card.body}
+          </p>
+
+          {/* Thumbnails */}
+          <div style={{ display: 'flex', gap: 10, marginBottom: 32 }}>
+            {INFO_CARDS.filter((_, i) => i !== active).map((c) => (
+              <div key={c.id} className="ic-thumb" onClick={() => goTo(INFO_CARDS.indexOf(c))}
+                style={{
+                  flex: 1, borderRadius: 10,
+                  border: '1.5px solid rgba(200,16,46,0.12)',
+                  background: '#fef2f4', padding: '12px 14px',
+                  display: 'flex', gap: 8, alignItems: 'center',
+                }}>
+                <div style={{ color: GRC_RED, flexShrink: 0, opacity: 0.7, transform: 'scale(0.6)', transformOrigin: 'left center' }}>{c.icon}</div>
+                <span style={{ fontSize: 11, fontWeight: 700, color: '#374151', letterSpacing: '0.04em', lineHeight: 1.4 }}>{c.tag}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Nav */}
+          <div style={{ display: 'flex', gap: 10 }}>
+            <NavBtn onClick={() => advance(-1)} dark>‹</NavBtn>
+            <NavBtn onClick={() => advance(1)} dark>›</NavBtn>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MAIN PAGE
+// ─────────────────────────────────────────────────────────────────────────────
 export default function Home() {
   return (
     <div style={styles.container}>
@@ -73,93 +314,40 @@ export default function Home() {
       {/* ── HERO SECTION ── */}
       <section style={styles.heroSection}>
         <div style={styles.noiseOverlay} />
-
-        {/* Bottom accent line */}
         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '6px', backgroundColor: '#8B0000', zIndex: 2 }} />
 
         <div style={{
           ...styles.sectionMax,
           padding: '0 48px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '60px',
-          flexWrap: 'wrap',
-          width: '100%',
-          position: 'relative',
-          zIndex: 1,
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          gap: '60px', flexWrap: 'wrap', width: '100%',
+          position: 'relative', zIndex: 1,
         }}>
-
-          {/* ── LEFT: Text content ── */}
           <div style={{ flex: 1, minWidth: '300px', maxWidth: '580px' }}>
-
-            {/* Eyebrow */}
-            <div className="hero-eyebrow" style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '12px',
-              marginBottom: '32px',
-            }}>
+            <div className="hero-eyebrow" style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', marginBottom: '32px' }}>
               <span style={{ display: 'block', width: '40px', height: '2px', backgroundColor: 'rgba(255,255,255,0.5)' }} />
-              <span style={{
-                color: 'rgba(255,255,255,0.65)',
-                fontSize: '11px',
-                fontWeight: 600,
-                letterSpacing: '0.22em',
-                textTransform: 'uppercase',
-                fontFamily: "'Poppins', sans-serif",
-              }}>
-                GRC Office
-              </span>
+              <span style={{ color: 'rgba(255,255,255,0.65)', fontSize: '11px', fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase' }}>GRC Office</span>
             </div>
 
-            {/* Heading — Times New Roman */}
-            <h1 className="hero-heading" style={{
-              fontFamily: "'Times New Roman', Times, serif",
-              color: 'white',
-              fontSize: 'clamp(38px, 5vw, 66px)',
-              fontWeight: 900,
-              lineHeight: 1.08,
-              letterSpacing: '-0.01em',
-              margin: '0',
-            }}>
+            <h1 className="hero-heading" style={{ fontFamily: "'Times New Roman', Times, serif", color: 'white', fontSize: 'clamp(38px, 5vw, 66px)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.01em', margin: '0' }}>
               Research &amp;{' '}
               <span style={{ fontStyle: 'italic' }}>Community</span>
               <br />Extension
             </h1>
 
-            {/* Divider */}
-            <div className="hero-divider" style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              margin: '32px 0',
-              maxWidth: '340px',
-            }}>
+            <div className="hero-divider" style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: '32px 0', maxWidth: '340px' }}>
               <span style={{ flex: 1, height: '1px', backgroundColor: 'rgba(255,255,255,0.25)' }} />
               <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'white', flexShrink: 0 }} />
               <span style={{ flex: 1, height: '1px', backgroundColor: 'rgba(255,255,255,0.25)' }} />
             </div>
 
-            {/* Body */}
-            <p className="hero-body" style={{
-              fontFamily: "'Poppins', sans-serif",
-              color: 'rgba(255,255,255,0.82)',
-              fontSize: '15px',
-              fontWeight: 400,
-              lineHeight: 1.9,
-              maxWidth: '440px',
-              margin: '0 0 44px 0',
-            }}>
+            <p className="hero-body" style={{ color: 'rgba(255,255,255,0.82)', fontSize: '15px', fontWeight: 400, lineHeight: 1.9, maxWidth: '440px', margin: '0 0 44px 0' }}>
               Leaders in transformative research and grassroots extension.
               Building knowledge. Empowering communities. Changing lives.
             </p>
 
-            {/* CTA */}
             <div className="hero-cta">
-              <Link
-                to="/contact"
-                style={styles.btnDark}
+              <Link to="/contact" style={styles.btnDark}
                 onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
                 onMouseLeave={e => e.currentTarget.style.opacity = '1'}
               >
@@ -171,35 +359,31 @@ export default function Home() {
             </div>
           </div>
 
-          {/* ── RIGHT: Logo image ── */}
           <div className="hero-image" style={{ flexShrink: 0 }}>
-            <img 
-              src="src/img/RCE logo.png" 
-              alt="RCE Medallion" 
-              style={{ 
-                width: 'clamp(280px, 35vw, 460px)',
-                height: 'clamp(280px, 35vw, 460px)',
-                objectFit: 'contain',
-                filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.3))' 
-              }} 
-            />
+            <img src="src/img/RCE logo.png" alt="RCE Medallion" style={{ width: 'clamp(280px, 35vw, 460px)', height: 'clamp(280px, 35vw, 460px)', objectFit: 'contain', filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.3))' }} />
           </div>
-
         </div>
       </section>
 
       {/* ── INFORMATION SECTION ── */}
-      <section style={{ backgroundColor: 'white', padding: '72px 32px' }}>
+      <section style={{ backgroundColor: '#fafafa', padding: '88px 48px' }}>
         <div style={styles.sectionMax}>
-          <h2 style={{ textAlign: 'center', fontWeight: 900, fontSize: '26px', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#111', marginBottom: '40px' }}>Information</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px' }}>
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} style={{ backgroundColor: '#FDE8EC', borderRadius: '12px', height: '190px', border: '1px solid rgba(200,16,46,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ color: 'rgba(200,16,46,0.25)', fontSize: '13px', fontWeight: 600 }}>Card {i}</span>
-              </div>
-            ))}
+          {/* Header */}
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 52, flexWrap: 'wrap', gap: 16 }}>
+            <div>
+              <span style={{ display: 'block', color: GRC_RED, fontSize: 11, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', marginBottom: 12 }}>What We Do</span>
+              <h2 style={{ fontFamily: "'Times New Roman', serif", fontWeight: 900, fontSize: 'clamp(26px, 3.5vw, 44px)', color: '#111', margin: 0, lineHeight: 1.1 }}>
+                Our Core <span style={{ color: GRC_RED, fontStyle: 'italic' }}>Programs</span>
+              </h2>
+            </div>
+            <p style={{ color: '#6b7280', fontSize: 14, lineHeight: 1.8, maxWidth: 340, margin: 0 }}>
+              Explore the pillars that define GRC's commitment to research excellence and meaningful community engagement.
+            </p>
           </div>
-          <div style={{ marginTop: '48px', height: '2px', background: `linear-gradient(to right, ${GRC_RED}, transparent)`, opacity: 0.3 }} />
+
+          <InfoCarousel />
+
+          <div style={{ marginTop: 48, height: '2px', background: `linear-gradient(to right, ${GRC_RED}, transparent)`, opacity: 0.15 }} />
         </div>
       </section>
 
@@ -207,11 +391,7 @@ export default function Home() {
       <section style={{ backgroundColor: 'white', padding: '10px 35px 100px', marginLeft: '100px' }}>
         <div style={{ ...styles.sectionMax, display: 'flex', alignItems: 'center', gap: '200px', flexWrap: 'wrap' }}>
           <div style={{ flexShrink: 0, flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '400px' }}>
-            <img 
-              src="src/img/grc logo.png" 
-              alt="GRC Icon"
-              style={{ width: '450px', height: '450px', objectFit: 'contain' }}
-            />
+            <img src="src/img/grc logo.png" alt="GRC Icon" style={{ width: '450px', height: '450px', objectFit: 'contain' }} />
           </div>
 
           <div style={{ flex: 1, minWidth: '20px' }}>
@@ -256,21 +436,20 @@ export default function Home() {
 
           <div style={{ display: 'flex', gap: '56px', flexWrap: 'wrap' }}>
             <div style={{ flex: 1, minWidth: '240px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
-               <div>
-                  <ContactInfo icon="📍" text="GRC Building, Caloocan, Philippines" />
-                  <ContactInfo icon="📞" text="0999-999-9999" />
-                  <ContactInfo icon="✉️" text="rceassistextension0104@gmail.com" />
-               </div>
-
-               <div style={{ borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '24px' }}>
-                  <p style={{ color: 'white', fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '0.1em' }}>Follow Us</p>
-                  <div style={{ display: 'flex', gap: '20px' }}>
-                    <a href="https://www.facebook.com/GrcRCExtension" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="FB" style={styles.socialIcon} className="social-icon" /></a>
-                    <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="IG" style={styles.socialIcon} className="social-icon" /></a>
-                    <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" style={styles.socialIcon} className="social-icon" /></a>
-                    <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="IN" style={styles.socialIcon} className="social-icon" /></a>
-                  </div>
-               </div>
+              <div>
+                <ContactInfo icon="📍" text="GRC Building, Caloocan, Philippines" />
+                <ContactInfo icon="📞" text="0999-999-9999" />
+                <ContactInfo icon="✉️" text="rceassistextension0104@gmail.com" />
+              </div>
+              <div style={{ borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '24px' }}>
+                <p style={{ color: 'white', fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '0.1em' }}>Follow Us</p>
+                <div style={{ display: 'flex', gap: '20px' }}>
+                  <a href="https://www.facebook.com/GrcRCExtension" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="FB" style={styles.socialIcon} className="social-icon" /></a>
+                  <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="IG" style={styles.socialIcon} className="social-icon" /></a>
+                  <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" style={styles.socialIcon} className="social-icon" /></a>
+                  <a href="#" target="_blank" rel="noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="IN" style={styles.socialIcon} className="social-icon" /></a>
+                </div>
+              </div>
             </div>
 
             <div style={{ flex: 1.3, minWidth: '280px' }}>
@@ -290,7 +469,6 @@ export default function Home() {
       <div style={{ width: '100%', height: '340px' }}>
         <iframe title="GRC Location" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3860.5!2d120.9813!3d14.6507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b1234567890a%3A0x1234567890abcdef!2sGlobal%20Reciprocal%20Colleges!5e0!3m2!1sen!2sph!4v1234567890" style={{ width: '100%', height: '100%', border: 'none' }} loading="lazy" />
       </div>
-
     </div>
   );
 }
