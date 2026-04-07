@@ -27,7 +27,7 @@ const SOCIAL_LINKS = [
     ),
   },
   {
-    label: 'YouTube',
+    label: 'Youtube',
     href: '#',
     icon: (
       <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
