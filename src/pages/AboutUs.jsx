@@ -18,19 +18,19 @@ const DKRED = '#8B0000';
 const PROFESSORS = [
   {
     id: 1,
-    name: "Emmanuel Dela Cruz",
-    title: "Professor, NSTP",
-    bio: "A visionary in social advocacy and pedagogy, Prof. Dela Cruz integrates decades of field experience into the classroom. By championing a values-first curriculum, they empower the next generation of leaders to navigate complex societal challenges with a steadfast commitment to ethical practice.",
-    highlight: false,
-    image: "",
-  },
-  {
-    id: 2,
     name: "Samuel Cubacub",
     title: "Professor, NSTP",
     bio: "Passionate about youth empowerment and civic engagement, Prof. Cubacub brings energy and purpose to every session — inspiring students to become active contributors to society.",
-    highlight: true,
+    highlight: false,
     image: "src/img/sam.png",
+  },
+  {
+    id: 2,
+    name: "Emmanuel Dela Cruz",
+    title: "Professor, NSTP",
+    bio: "A visionary in social advocacy and pedagogy, Prof. Dela Cruz integrates decades of field experience into the classroom. By championing a values-first curriculum, they empower the next generation of leaders to navigate complex societal challenges with a steadfast commitment to ethical practice.",
+    highlight: true,
+    image: "src/img/dela cruz.png",
   },
   {
     id: 3,
@@ -46,14 +46,14 @@ const PROFESSORS = [
     title: "Professor, NSTP",
     bio: "Prof. Gezzel bridges the gap between academic theory and community impact. Drawing from a robust background in social work, they equip students with a practical toolkit for civic engagement, ensuring every graduate is prepared to lead sustainable, integrity-driven initiatives in their local sectors.",
     highlight: true,
-    image: "",
+    image: "src/img/gezzel.png",
   }
 ];
 
 const SENIOR_SAS = [
   { id: 1, name: "ROMEROSO", label: "SENIOR S.A", highlight: false, image: "src/img/Image_jmil.png" },
   { id: 2, name: "CLAVIO",   label: "SENIOR S.A", highlight: true, image: "src/img/clavio.png" },
-  { id: 3, name: "DEMAIN",   label: "SENIOR S.A", highlight: false, image: "src/img/.png" },
+  { id: 3, name: "DEMAIN",   label: "SENIOR S.A", highlight: false, image: "src/img/demain.png" },
   { id: 4, name: "GUARINO",  label: "SENIOR S.A", highlight: true, image: "src/img/guarino.png" },
   { id: 5, name: "DISPO",    label: "SENIOR S.A", highlight: false, image: "src/img/dispo.png" },
   
@@ -67,7 +67,10 @@ const NEW_SAS = [
   { id: 5, name: "AGULLO",  label: "NEW S.A", image: "src/img/agullo.png" },
   { id: 6, name: "DACULAN",  label: "NEW S.A", image: "src/img/daculan.png" },
   { id: 7, name: "SOMIDO",  label: "NEW S.A", image: "src/img/somido.png" },
-  { id: 7, name: "ABUT",  label: "NEW S.A", image: "src/img/.png" },
+  { id: 7, name: "ABUT",  label: "NEW S.A", image: "src/img/abut.png" },
+  { id: 8, name: "CALIAGA",  label: "NEW S.A", image: "src/img/caliaga.png" },
+  { id: 9, name: "DELA CRUZ",  label: "NEW S.A", image: "src/img/dela cruz...png" },
+  { id: 10, name: "ALFONSO",  label: "NEW S.A", image: "src/img/alfonso.png" },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────

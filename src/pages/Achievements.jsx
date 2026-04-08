@@ -8,10 +8,10 @@ const GRC_ICON_PHOTO = "src/img/grc logo.png";
 
 // ── 2. PROJECT DATA ──
 const PROJECTS = [
-  { id: 1, tag: 'Research',       title: 'Academic Research Initiative',  desc: 'A faculty-led multi-disciplinary research program bridging local industry needs with institutional expertise.',              year: '2023'      },
+  { id: 1, tag: 'Research',      title: 'Academic Research Initiative',  desc: 'A faculty-led multi-disciplinary research program bridging local industry needs with institutional expertise.',       year: '2023'      },
   { id: 2, tag: 'Community',      title: 'NSTP Community Outreach',       desc: 'Student-driven extension programs delivering livelihood training, health aid, and civic education to partner communities.', year: '2023–2024' },
   { id: 3, tag: 'Innovation',     title: 'Innovation & Tech Expo',        desc: 'Annual showcase of student capstone projects, faculty inventions, and industry-sponsored technology challenges.',           year: '2024'      },
-  { id: 4, tag: 'Alumni',         title: 'Alumni Mentorship Network',     desc: 'Connecting graduating students with alumni professionals for career guidance, internship referrals, and lifelong support.', year: '2024'      },
+  { id: 4, tag: 'Alumni',          title: 'Alumni Mentorship Network',     desc: 'Connecting graduating students with alumni professionals for career guidance, internship referrals, and lifelong support.', year: '2024'      },
   { id: 5, tag: 'Sustainability', title: 'Green Campus Program',          desc: 'Institutional sustainability drive covering waste management, energy reduction, and environmental literacy campaigns.',     year: '2022–2024' },
 ];
 
@@ -31,7 +31,7 @@ const styles = {
 
   noise: {
     position: 'absolute', inset: 0, opacity: 0.06,
-    backgroundImage: NOISE, backgroundSize: '200px 200px', pointerEvents: 'none',
+    backgroundImage: NOISE, backgroundSize: '100px 100px', pointerEvents: 'none',
   },
 };
 
@@ -78,7 +78,7 @@ function renderProjectCard(item, isActive) {
       </svg>
     ),
     Alumni: (
-      <svg width="36" height="36" fill="none" viewBox="0 0 24 24" stroke={GRC_RED} strokeWidth="1.5">
+      <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke={GRC_RED} strokeWidth="1.5">
         <path d="M17 20h5v-1a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-1a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/>
       </svg>
     ),
@@ -375,7 +375,7 @@ export default function Achievements() {
       </section>
 
       {/* ── PROJECTS SECTION ── */}
-      <section style={{ backgroundColor: 'white', padding: '100px 0 80px' }}>
+      <section style={{ backgroundColor: 'white', padding: '100px 0 100px' }}>
         <div style={styles.sectionMax}>
           <p style={{
             textAlign: 'center', color: '#aaa', fontSize: '11px',
@@ -385,13 +385,13 @@ export default function Achievements() {
           </p>
           <h2 style={{
             textAlign: 'center', fontWeight: 900, fontSize: '32px',
-            color: GRC_RED, marginBottom: '8px',
+            color: GRC_RED, marginBottom: '0px',
           }}>
             Projects
           </h2>
           <p style={{
             textAlign: 'center', color: '#bbb', fontSize: '13px',
-            marginBottom: '32px', fontStyle: 'italic',
+            marginBottom: '-40px', fontStyle: 'italic',
           }}>
             Click any card to bring it forward
           </p>
@@ -412,14 +412,73 @@ export default function Achievements() {
       </section>
 
       {/* ── INNOVATION & GROWTH ── */}
-      <section style={{ backgroundColor: 'white', paddingBottom: '80px' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center', padding: '0 32px' }}>
+      <section style={{ backgroundColor: 'white', paddingBottom: '150px' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center', padding: '0 32px' }}>
           <h2 style={{ fontWeight: 900, fontSize: '36px', color: GRC_RED, marginBottom: '15px' }}>Innovation & Growth</h2>
           <p style={{ color: '#999', fontSize: '14px', marginBottom: '30px', fontStyle: 'italic' }}>Future-forward thinking and academic excellence.</p>
-          <p style={{ color: '#555', fontSize: '16px', lineHeight: 1.9 }}>
-            Our journey is defined by a series of milestones that bridge the gap between academic research and industry application.
-            By leveraging cutting-edge expertise, we have pioneered innovative solutions that foster long-term sustainability.
-          </p>
+          
+          <div style={{ marginBottom: '60px' }}>
+            <p style={{ color: '#555', fontSize: '16px', lineHeight: 1.9, maxWidth: '800px', margin: '0 auto' }}>
+              Our journey is defined by a series of milestones that bridge the gap between academic research and industry application. 
+              By leveraging cutting-edge expertise, we have pioneered innovative solutions that foster long-term sustainability.
+            </p>
+          </div>
+
+          {/* ── MISSION & VISION CARDS (Mission Left, Vision Right) ── */}
+          <div style={{ 
+            display: 'flex', 
+            gap: '30px', 
+            textAlign: 'left', 
+            flexWrap: 'wrap',
+            justifyContent: 'center'
+          }}>
+            {/* Mission Card (Left) */}
+            <div style={{ 
+              flex: '1 1 300px', 
+              maxWidth: '450px',
+              padding: '40px 32px', 
+              borderTop: `4px solid ${GRC_RED}`, 
+              background: '#fff',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+              borderRadius: '12px',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={GRC_RED} strokeWidth="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                 </svg>
+                 <h3 style={{ fontSize: '14px', fontWeight: 800, color: GRC_RED, textTransform: 'uppercase', letterSpacing: '0.15em', margin: 0 }}>
+                   Our Mission
+                 </h3>
+              </div>
+              <p style={{ fontSize: '15px', color: '#444', lineHeight: 1.8, margin: 0 }}>
+                GRC is creating a culture for successful, socially responsible, morally upright skilled workers
+                and highly competent professionals through values-based quality education.
+              </p>
+            </div>
+
+            {/* Vision Card (Right) */}
+            <div style={{ 
+              flex: '1 1 300px', 
+              maxWidth: '450px',
+              padding: '40px 32px', 
+              borderTop: `4px solid ${GRC_RED}`, 
+              background: '#fff',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+              borderRadius: '12px',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={GRC_RED} strokeWidth="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                 </svg>
+                 <h3 style={{ fontSize: '14px', fontWeight: 800, color: GRC_RED, textTransform: 'uppercase', letterSpacing: '0.15em', margin: 0 }}>
+                   Our Vision
+                 </h3>
+              </div>
+              <p style={{ fontSize: '15px', color: '#444', lineHeight: 1.8, margin: 0 }}>
+                A global community of excellent individuals with values.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
